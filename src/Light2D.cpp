@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2014-2016 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2014 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -70,7 +70,7 @@ ofShader Light2D::DEFAULT_LIGHT_SHADER;
 Light2D::Light2D():
     _position(0, 0, 0),
     _angle(0),
-    _viewAngle(glm::two_pi<float>()),
+    _viewAngle(TWO_PI),
     _radius(DEFAULT_RADIUS),
     _color(1.0, 1.0, 1.0, 1.0),
     _linearizeFactor(1),
@@ -117,7 +117,7 @@ void Light2D::draw()
 
     ofPushMatrix();
     ofTranslate(_position);
-    ofRotateZRad(_angle - _viewAngle / 2.0);
+    ofRotateZ(ofRadToDeg(_angle - _viewAngle / 2.0));
     _mesh.draw();
     ofPopMatrix();
 
@@ -125,14 +125,14 @@ void Light2D::draw()
 }
 
 
-void Light2D::setPosition(const glm::vec3& position)
+void Light2D::setPosition(const ofVec3f& position)
 {
     _position = position;
     _isMeshDirty = true;
 }
 
 
-glm::vec3 Light2D::getPosition() const
+const ofVec3f& Light2D::getPosition() const
 {
     return _position;
 }
@@ -150,7 +150,6 @@ float Light2D::getAngle() const
     return _angle;
 }
 
-    
 void Light2D::setViewAngle(float viewAngle)
 {
     _viewAngle = viewAngle;
@@ -217,7 +216,7 @@ void Light2D::createMesh() const
     _mesh.clear();
     _mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
 
-    glm::vec3 position(0, 0, 0);
+    ofVec3f position(0, 0, 0);
 
     ofFloatColor color(_color);
 
@@ -226,7 +225,7 @@ void Light2D::createMesh() const
 
     color = ofFloatColor(0, 0, 0, 0);
 
-    float fanIncrement = glm::two_pi<float>() / 32;
+    float fanIncrement = TWO_PI / 32;
 
     for (float angle = 0.0; angle < _viewAngle; angle += fanIncrement)
     {

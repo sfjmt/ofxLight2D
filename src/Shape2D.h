@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2014-2016 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2014 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@
 #pragma once
 
 
+#include "ofVec2f.h"
 #include "ofColor.h"
 #include "ofMesh.h"
 #include "ofPolyline.h"
@@ -37,7 +38,8 @@ namespace ofx {
 class Shape2D
 {
 public:
-    typedef std::vector<std::shared_ptr<Shape2D>> List;
+    typedef std::shared_ptr<Shape2D> SharedPtr;
+    typedef std::vector<SharedPtr> List;
 
     Shape2D();
     virtual ~Shape2D();
@@ -46,15 +48,15 @@ public:
     void draw();
 
     void setShape(const ofPolyline& shape);
-    ofPolyline getShape() const;
+    const ofPolyline& getShape() const;
 
-    glm::vec3 getCenter() const;
+    ofVec3f getCenter() const;
 
     void setColor(const ofFloatColor& color);
     ofFloatColor getColor() const;
 
 protected:
-    glm::vec3 _position;
+    ofVec3f _position;
 
     ofFloatColor _color;
 

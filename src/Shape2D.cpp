@@ -65,13 +65,13 @@ void Shape2D::setShape(const ofPolyline& shape)
 }
 
 
-ofPolyline Shape2D::getShape() const
+const ofPolyline& Shape2D::getShape() const
 {
     return _shape;
 }
 
 
-glm::vec3 Shape2D::getCenter() const
+ofVec3f Shape2D::getCenter() const
 {
     return _position;
 }
@@ -95,7 +95,7 @@ void Shape2D::createMesh() const
     _mesh.clear();
     _mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
 
-    glm::vec3 position(_position);
+    ofVec3f position(_position);
 
     _mesh.addVertex(position);
 
