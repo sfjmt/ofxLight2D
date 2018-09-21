@@ -22,24 +22,19 @@
 //
 // =============================================================================
 
-
 #pragma once
-
 
 #include "ofVec2f.h"
 #include "ofColor.h"
 #include "ofMesh.h"
 #include "ofShader.h"
 
-
 namespace ofx {
 
-
-class Light2D
-{
-public:
-	typedef std::shared_ptr<Light2D> SharedPtr;
-	typedef std::vector<SharedPtr> List;
+class Light2D {
+   public:
+    typedef std::shared_ptr<Light2D> SharedPtr;
+    typedef std::vector<SharedPtr> List;
 
     Light2D();
     virtual ~Light2D();
@@ -74,7 +69,7 @@ public:
 
     static ofShader DEFAULT_LIGHT_SHADER;
 
-protected:
+   protected:
     ofVec3f _position;
     float _angle;
 
@@ -90,5 +85,4 @@ protected:
     mutable ofMesh _mesh;
 };
 
-
-} // namespace ofx
+}  // namespace ofx

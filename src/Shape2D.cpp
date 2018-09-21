@@ -22,76 +22,43 @@
 //
 // =============================================================================
 
-
 #include "Shape2D.h"
 #include "ofGraphics.h"
 #include "ofAppRunner.h"
 
-
 namespace ofx {
 
+Shape2D::Shape2D() : _color(.5, 1), _isMeshDirty(true) {}
 
-Shape2D::Shape2D():
-    _color(.5, 1),
-    _isMeshDirty(true)
-{
-}
+Shape2D::~Shape2D() {}
 
-
-Shape2D::~Shape2D()
-{
-}
-
-
-void Shape2D::update()
-{
-    if (_isMeshDirty)
-    {
+void Shape2D::update() {
+    if (_isMeshDirty) {
         createMesh();
     }
 }
 
-
-void Shape2D::draw()
-{
-    _mesh.draw();
+void Shape2D::draw() {
+    //    _mesh.draw();
 }
 
-
-void Shape2D::setShape(const ofPolyline& shape)
-{
+void Shape2D::setShape(const ofPolyline& shape) {
     _shape = shape;
     _position = _shape.getCentroid2D();
 }
 
+const ofPolyline& Shape2D::getShape() const { return _shape; }
 
-const ofPolyline& Shape2D::getShape() const
-{
-    return _shape;
-}
+ofVec3f Shape2D::getCenter() const { return _position; }
 
-
-ofVec3f Shape2D::getCenter() const
-{
-    return _position;
-}
-
-
-void Shape2D::setColor(const ofFloatColor& color)
-{
+void Shape2D::setColor(const ofFloatColor& color) {
     _color = color;
     _isMeshDirty = true;
 }
 
+ofFloatColor Shape2D::getColor() const { return _color; }
 
-ofFloatColor Shape2D::getColor() const
-{
-    return _color;
-}
-
-
-void Shape2D::createMesh() const
-{
+void Shape2D::createMesh() const {
     _mesh.clear();
     _mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
 
@@ -104,8 +71,7 @@ void Shape2D::createMesh() const
 
     _mesh.addColor(_color);
 
-	for (std::size_t i = 0; i < _shape.size(); ++i)
-    {
+    for (std::size_t i = 0; i < _shape.size(); ++i) {
         _mesh.addVertex(_shape[i]);
         _mesh.addColor(color);
     }
@@ -116,5 +82,4 @@ void Shape2D::createMesh() const
     _isMeshDirty = false;
 }
 
-
-} // namespace ofx
+}  // namespace ofx

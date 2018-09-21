@@ -22,22 +22,17 @@
 //
 // =============================================================================
 
-
 #pragma once
-
 
 #include "ofVec2f.h"
 #include "ofColor.h"
 #include "ofMesh.h"
 #include "ofPolyline.h"
 
-
 namespace ofx {
 
-
-class Shape2D
-{
-public:
+class Shape2D {
+   public:
     typedef std::shared_ptr<Shape2D> SharedPtr;
     typedef std::vector<SharedPtr> List;
 
@@ -55,7 +50,7 @@ public:
     void setColor(const ofFloatColor& color);
     ofFloatColor getColor() const;
 
-protected:
+   protected:
     ofVec3f _position;
 
     ofFloatColor _color;
@@ -66,8 +61,6 @@ protected:
     mutable bool _isMeshDirty;
 
     mutable ofMesh _mesh;
-
 };
 
-
-} // namespace ofx
+}  // namespace ofx
